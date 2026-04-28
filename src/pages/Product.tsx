@@ -42,8 +42,12 @@ const RELATED_OVERRIDES: Record<string, string[]> = {
 };
 
 function formatPrice(value: number) {
-  return `$${value.toFixed(2)}`;
+  return new Intl.NumberFormat("ru-BY", {
+    style: "currency",
+    currency: "BYN",
+  }).format(value);
 }
+
 
 export function Product() {
   const { id } = useParams();

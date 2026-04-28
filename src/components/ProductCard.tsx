@@ -9,7 +9,7 @@ function formatPrice(value: number) {
 }
 
 export function ProductCard({ product }: { product: Product }) {
-  
+
 
   return (
     <article className={styles.card}>
@@ -21,6 +21,7 @@ export function ProductCard({ product }: { product: Product }) {
         <h3 className={styles.name}>
           <Link to={`/product/${product.id}`}>{product.name}</Link>
         </h3>
+
 
         <div className={styles.priceRow}>
           <div className={styles.price}>{formatPrice(product.price)}</div>
