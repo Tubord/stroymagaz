@@ -1,8 +1,8 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+import "./style/global.css";
 import App from "./App";  
 
-/* Старые ссылки вида /#/cart → нормальный путь /cart (BrowserRouter). */
 if (typeof window !== "undefined") {
   const h = window.location.hash;
   if (h.startsWith("#/") && h.length > 2) {

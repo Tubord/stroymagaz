@@ -6,6 +6,7 @@ import { ProductCard } from "../components/ProductCard";
 import { BadgeBoxIcon, BadgeShieldIcon, BadgeTruckIcon, CartIcon } from "../components/icons";
 import { products } from "../data/products";
 import type { TechnicalSpec } from "../types";
+import { useCart } from "../store/CartContext";
 import styles from "./Product.module.css";
 
 const FALLBACK_SPECS: TechnicalSpec[] = [
@@ -48,7 +49,7 @@ export function Product() {
   const { id } = useParams();
   const [quantity, setQuantity] = useState(1);
   const [specsOpen, setSpecsOpen] = useState(false);
-
+  const { addToCart } = useCart();
 
   const product = useMemo(() => products.find((p) => p.id === id), [id]);
 
@@ -121,10 +122,10 @@ export function Product() {
         <main className={styles.main}>
           <div className={styles.container}>
             <p className={styles.breadcrumbs}>
-              <Link to="/">Каталог</Link> <span aria-hidden="true">/</span>{" "}
-              Товар не найден
+              <Link to="/">Products</Link> <span aria-hidden="true">/</span>{" "}
+              Not found
             </p>
-            <h1 className={styles.h1}>Товар не найден</h1>
+            <h1 className={styles.h1}>Product not found</h1>
           </div>
         </main>
       </div>
@@ -137,18 +138,18 @@ export function Product() {
       <main className={styles.main}>
         <div className={styles.container}>
           <p className={styles.breadcrumbs}>
-            <Link to="/">Каталог</Link> <span aria-hidden="true">/</span>{" "}
+            <Link to="/">Products</Link> <span aria-hidden="true">/</span>{" "}
             {product.name}
           </p>
 
           <div className={styles.layout}>
             <div className={styles.media}>
-              
+
             </div>
 
             <div className={styles.panel}>
               <h1 className={styles.h1}>{product.name}</h1>
-              
+
               <div className={styles.priceRow}>
                 <div className={styles.price}>{formatPrice(product.price)}</div>
                 <div className={styles.unit}>/unit</div>
@@ -160,27 +161,27 @@ export function Product() {
                     <span className={styles.badgeIcon} aria-hidden="true">
                       <BadgeBoxIcon />
                     </span>
-                    Товар премиум класса
+                    Quality Assured
                   </div>
-                  <div className={styles.badgeText}>Качество гарантировано</div>
+                  <div className={styles.badgeText}>Premium grade material</div>
                 </div>
                 <div className={styles.badge}>
                   <div className={styles.badgeTitle}>
                     <span className={styles.badgeIcon} aria-hidden="true">
                       <BadgeTruckIcon />
                     </span>
-                    Скорость доставки
+                    Fast Delivery
                   </div>
-                  <div className={styles.badgeText}>1-3 Рабочих дней</div>
+                  <div className={styles.badgeText}>2-5 business days</div>
                 </div>
                 <div className={styles.badge}>
                   <div className={styles.badgeTitle}>
                     <span className={styles.badgeIcon} aria-hidden="true">
                       <BadgeShieldIcon />
                     </span>
-                    Гарантия
+                    Warranty
                   </div>
-                  <div className={styles.badgeText}>30-дней</div>
+                  <div className={styles.badgeText}>30-day guarantee</div>
                 </div>
               </div>
 
@@ -205,10 +206,16 @@ export function Product() {
               </div>
 
               <div className={styles.actions}>
-                
-                 
+                <button
+                  className={styles.primary}
+                  type="button"
+                  onClick={() => addToCart(product, quantity)}
+                >
+                  <CartIcon className={styles.primaryIcon} />
+                  Add to Cart
+                </button>
                 <button className={styles.secondary} type="button">
-                  Купить
+                  Buy Now
                 </button>
               </div>
 
@@ -223,7 +230,7 @@ export function Product() {
                     aria-expanded={specsOpen}
                     onClick={() => setSpecsOpen((open) => !open)}
                   >
-                    <span>Характеристики</span>
+                    <span>Technical Specifications</span>
                     <span
                       className={specsOpen ? styles.specChevronOpen : styles.specChevron}
                       aria-hidden="true"
@@ -259,7 +266,7 @@ export function Product() {
           </div>
 
           <section className={styles.relatedSection}>
-            <h2 className={styles.relatedTitle}>Похожие товары</h2>
+            <h2 className={styles.relatedTitle}>Related Products</h2>
             {relatedProducts.length > 0 ? (
               <div className={styles.relatedList}>
                 {relatedProducts.map((related) => (

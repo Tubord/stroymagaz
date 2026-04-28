@@ -1,6 +1,9 @@
 import { useMemo, useState } from "react";
+import { products } from "../data/products";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
+import { ProductCard } from "../components/ProductCard";
+import { SlidersIcon } from "../components/icons";
 import styles from "./Home.module.css";
 
 type SortValue = "name-asc" | "price-asc" | "price-desc";
@@ -15,6 +18,33 @@ export function Home() {
   const [minPrice, setMinPrice] = useState<number>(PRICE_MIN);
   const [maxPrice, setMaxPrice] = useState<number>(PRICE_MAX);
 
+  const filteredProducts = useMemo(() => {
+    return products.filter((p) => {
+      if (p.price < minPrice || p.price > maxPrice) return false;
+      if (selectedRatings.length > 0 && !selectedRatings.some((rating) => p.rating >= rating)) return false;
+      return true;
+    });
+  }, [maxPrice, minPrice, selectedRatings]);
+
+  const visibleProducts = useMemo(() => {
+    const next = [...filteredProducts];
+    if (sortBy === "price-asc") {
+      next.sort((a, b) => a.price - b.price);
+      return next;
+    }
+    if (sortBy === "price-desc") {
+      next.sort((a, b) => b.price - a.price);
+      return next;
+    }
+    next.sort((a, b) => a.name.localeCompare(b.name));
+    return next;
+  }, [filteredProducts, sortBy]);
+
+  const toggleRating = (value: number) => {
+    setSelectedRatings((prev) =>
+      prev.includes(value) ? prev.filter((v) => v !== value) : [...prev, value],
+    );
+  };
 
   const clearFilters = () => {
     setSelectedRatings([]);
@@ -43,10 +73,11 @@ export function Home() {
               aria-expanded={filtersOpen}
               aria-controls="filters-panel"
             >
-
+              <SlidersIcon />
+              {filtersOpen ? "Спрятать" : "Фильтры"}
             </button>
 
-            
+            <div className={styles.count}>Показать {visibleProducts.length} товаров</div>
 
             <div className={styles.sort}>
               <span className={styles.sortLabel}>Сортировать по:</span>
@@ -75,7 +106,7 @@ export function Home() {
                           <input
                             type="checkbox"
                             checked={checked}
-                            
+                            onChange={() => toggleRating(rating)}
                           />
                           <span>{rating}+ звезд</span>
                         </label>
@@ -130,8 +161,11 @@ export function Home() {
             </section>
           ) : null}
 
-          
-          
+          <section className={styles.grid} aria-label="Products">
+            {visibleProducts.map((p) => (
+              <ProductCard key={p.id} product={p} />
+            ))}
+          </section>
         </div>
       </main>
 

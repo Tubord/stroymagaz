@@ -2,10 +2,10 @@ import { useState } from "react";
 import { CartIcon, SearchIcon } from "./icons";
 import styles from "./Header.module.css";
 import { Link } from "react-router-dom";
-
+import { useCart } from "../store/CartContext";
 
 export function Header() {
-  
+  const { cartCount } = useCart();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
@@ -52,7 +52,10 @@ export function Header() {
             <SearchIcon />
           </button>
 
-        
+          <Link className={styles.cart} to="/cart" aria-label="Cart">
+            <CartIcon />
+            {cartCount > 0 ? <span className={styles.cartBadge}>{cartCount}</span> : null}
+          </Link>
 
           <button
             className={`${styles.iconBtn} ${styles.mobileOnly}`}
