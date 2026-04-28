@@ -1,0 +1,97 @@
+import { useState } from "react";
+import { CartIcon, SearchIcon } from "./icons";
+import styles from "./Header.module.css";
+import { Link } from "react-router-dom";
+
+export function Header() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  return (
+    <header className={styles.header}>
+      <div className={styles.container}>
+        <Link className={styles.brand} to="/" aria-label="BuildMart home">
+          <span className={styles.logo} aria-hidden="true">
+            BM
+          </span>
+          <span className={styles.brandName}>BuildMart</span>
+        </Link>
+
+        <nav className={styles.nav} aria-label="Primary">
+          <Link className={styles.navLink} to="/">
+            Каталог
+          </Link>
+          <button className={styles.navLinkButton} type="button">
+            Категирии
+          </button>
+          <button className={styles.navLinkButton} type="button">
+            Покупка
+          </button>
+          <button className={styles.navLinkButton} type="button">
+            О нас
+          </button>
+        </nav>
+
+        <div className={styles.headerRight}>
+          <div className={styles.searchWrap}>
+            <SearchIcon className={styles.searchIcon} />
+            <input
+              className={styles.search}
+              placeholder="Поиск..."
+              aria-label="Поиск..."
+            />
+          </div>
+
+          <button
+            className={`${styles.iconBtn} ${styles.mobileOnly}`}
+            type="button"
+            aria-label="Open search"
+            onClick={() => setMobileMenuOpen((v) => !v)}
+          >
+            <SearchIcon />
+          </button>
+
+
+          <button
+            className={`${styles.iconBtn} ${styles.mobileOnly}`}
+            type="button"
+            aria-label="Open menu"
+            aria-expanded={mobileMenuOpen}
+            onClick={() => setMobileMenuOpen((v) => !v)}
+          >
+            <span className={styles.burger} />
+          </button>
+        </div>
+      </div>
+
+      {mobileMenuOpen ? (
+        <div className={styles.mobileMenu} role="dialog" aria-label="Mobile menu">
+          <div className={styles.mobileMenuInner}>
+            <div className={styles.mobileSearchWrap}>
+              <SearchIcon className={styles.searchIcon} />
+              <input
+                className={styles.search}
+                placeholder="Поиск..."
+                aria-label="Поиск..."
+              />
+            </div>
+            <nav className={styles.mobileNav} aria-label="Mobile primary">
+              <Link className={styles.mobileNavLink} to="/" onClick={() => setMobileMenuOpen(false)}>
+                Каталог
+              </Link>
+              <button className={styles.mobileNavButton} type="button">
+                Категории
+              </button>
+              <button className={styles.mobileNavButton} type="button">
+                Покупка
+              </button>
+              <button className={styles.mobileNavButton} type="button">
+                О нас
+              </button>
+            </nav>
+          </div>
+        </div>
+      ) : null}
+    </header>
+  );
+}
+
