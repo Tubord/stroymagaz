@@ -4,7 +4,7 @@ export const products: Product[] = [
   {
     id: "5",
     name: "Exterior Paint Set",
-    price: 45.99,
+    price: 19,
     rating: 3.5,
     category: "Paint & Coatings",
     imageUrl:
@@ -28,7 +28,7 @@ export const products: Product[] = [
   {
     id: "2",
     name: "Plywood Sheets",
-    price: 52.99,
+    price: 24,
     rating: 4.5,
     category: "Wood & Lumber",
     imageUrl:
@@ -76,7 +76,7 @@ export const products: Product[] = [
   {
     id: "3",
     name: "Premium Lumber Planks",
-    price: 89.99,
+    price: 35,
     rating: 4.5,
     category: "Wood & Lumber",
     imageUrl:
@@ -124,7 +124,7 @@ export const products: Product[] = [
   {
     id: "6",
     name: "Steel I-Beams",
-    price: 349.99,
+    price: 50,
     rating: 5.0,
     category: "Steel & Metal",
     imageUrl:
