@@ -3,7 +3,9 @@ import { CartIcon, SearchIcon } from "./icons";
 import styles from "./Header.module.css";
 import { Link } from "react-router-dom";
 
+
 export function Header() {
+  
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
@@ -50,6 +52,7 @@ export function Header() {
             <SearchIcon />
           </button>
 
+        
 
           <button
             className={`${styles.iconBtn} ${styles.mobileOnly}`}
