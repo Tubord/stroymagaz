@@ -147,8 +147,8 @@ export function Home() {
                     />
                   </div>
                   <div className={styles.rangeLabels}>
-                    <span>${PRICE_MIN}</span>
-                    <span>${PRICE_MAX}</span>
+                    <span>Br{PRICE_MIN}</span>
+                    <span>Br{PRICE_MAX}</span>
                   </div>
                 </div>
 

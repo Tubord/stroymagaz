@@ -1,15 +1,20 @@
 import type { Product } from "../types";
 import styles from "./ProductCard.module.css";
+import { Rating } from "./Rating";
 import { Link } from "react-router-dom";
 import { CartIcon } from "./icons";
-
+import { useCart } from "../store/CartContext";
 
 function formatPrice(value: number) {
-  return `$${value.toFixed(2)}`;
+  return new Intl.NumberFormat("ru-BY", {
+    style: "currency",
+    currency: "BYN",
+  }).format(value);
 }
 
-export function ProductCard({ product }: { product: Product }) {
 
+export function ProductCard({ product }: { product: Product }) {
+  const { addToCart } = useCart();
 
   return (
     <article className={styles.card}>
@@ -22,6 +27,9 @@ export function ProductCard({ product }: { product: Product }) {
           <Link to={`/product/${product.id}`}>{product.name}</Link>
         </h3>
 
+        <div className={styles.ratingRow}>
+          <Rating value={product.rating} />
+        </div>
 
         <div className={styles.priceRow}>
           <div className={styles.price}>{formatPrice(product.price)}</div>
@@ -29,7 +37,7 @@ export function ProductCard({ product }: { product: Product }) {
 
         <div className={styles.category}>{product.category}</div>
 
-        <button className={styles.cta} type="button" >
+        <button className={styles.cta} type="button" onClick={() => addToCart(product, 1)}>
           <CartIcon className={styles.ctaIcon} />
           Добавить в корзину
         </button>

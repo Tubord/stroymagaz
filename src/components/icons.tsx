@@ -186,16 +186,22 @@ export function TrashIcon(props: React.SVGProps<SVGSVGElement>) {
       {...props}
     >
       <path
-        d="M3 6h18M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1v2m2 0v14a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2V6h10Z"
+        d="M6 7h12M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2m-7 0v12a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V7"
         stroke="currentColor"
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      <path d="M10 11v6M14 11v6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+      <path
+        d="M10 11v6M14 11v6"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
     </svg>
   );
 }
+
 
 export function CalendarMiniIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -240,16 +246,20 @@ export function FacebookIcon(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
-export function TwitterIcon(props: React.SVGProps<SVGSVGElement>) {
+export function ViberIcon() {
   return (
-    <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" {...props}>
-      <path
-        d="M22 5.8c-.7.3-1.5.5-2.3.6.8-.5 1.5-1.2 1.8-2.1-.8.5-1.7.8-2.6 1A4 4 0 0 0 12 8.1c0 .3 0 .6.1.9A11.4 11.4 0 0 1 3 4.9c-.4.7-.5 1.4-.5 2.2 0 1.4.7 2.6 1.8 3.4-.7 0-1.3-.2-1.9-.5v.1c0 2 1.4 3.7 3.3 4.1-.4.1-.8.2-1.2.2-.3 0-.6 0-.9-.1.6 1.7 2.2 3 4.2 3A8.1 8.1 0 0 1 2 19.1 11.3 11.3 0 0 0 8.1 21c7.3 0 11.3-6 11.3-11.2v-.5c.8-.5 1.5-1.2 2-2Z"
-        fill="currentColor"
-      />
+    <svg
+      viewBox="0 0 24 24"
+      width="20"
+      height="20"
+      fill="currentColor"
+    >
+      <path d="M12.04 2C6.58 2 2.16 6.07 2.16 11.08c0 2.02.77 3.87 2.05 5.33L3.2 22l5.68-1.06c.96.4 2.02.62 3.16.62 5.46 0 9.88-4.07 9.88-9.08S17.5 2 12.04 2zm5.64 12.74c-.23.66-1.34 1.26-1.85 1.34-.47.08-1.07.12-1.72-.09-.4-.13-.91-.3-1.57-.58-2.77-1.2-4.57-4.06-4.71-4.25-.14-.19-1.13-1.5-1.13-2.86 0-1.36.71-2.03.96-2.31.25-.28.55-.35.74-.35h.53c.17 0 .4-.06.63.49.23.56.8 1.93.87 2.07.07.14.12.31.02.5-.1.19-.15.31-.3.48-.15.17-.31.38-.45.51-.15.15-.3.31-.13.6.17.28.76 1.26 1.63 2.04 1.12 1 2.06 1.31 2.35 1.46.29.15.46.13.63-.08.17-.21.74-.86.94-1.15.2-.29.4-.24.67-.14.27.1 1.71.81 2 .96.29.15.48.23.55.35.07.12.07.7-.16 1.36z"/>
     </svg>
   );
 }
+
+
 
 export function InstagramIcon(props: React.SVGProps<SVGSVGElement>) {
   return (

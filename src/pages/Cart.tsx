@@ -12,7 +12,10 @@ import { useCart } from "../store/CartContext";
 import styles from "./Cart.module.css";
 
 function formatPrice(value: number) {
-  return `$${value.toFixed(2)}`;
+  return new Intl.NumberFormat("ru-BY", {
+    style: "currency",
+    currency: "BYN",
+  }).format(value);
 }
 
 const TAX_RATE = 0.08;
@@ -59,14 +62,14 @@ function CartSidebar({ subtotal, tax, discount, total, checkoutDisabled }: CartS
       </aside>
 
       <aside className={styles.shippingCard} aria-label="Shipping information">
-        <h2 className={styles.shippingTitle}>Shipping Information</h2>
+        <h2 className={styles.shippingTitle}>Информация доставки</h2>
         <div className={styles.shipBlock}>
           <span className={styles.shipIconWrap} aria-hidden="true">
             <CalendarMiniIcon className={styles.shipIcon} />
           </span>
           <div>
-            <div className={styles.shipLabel}>Estimated Delivery</div>
-            <div className={styles.shipValue}>3-5 business days</div>
+            <div className={styles.shipLabel}>Предпологаемая скорость доставки</div>
+            <div className={styles.shipValue}>1-3 рабочих дня</div>
           </div>
         </div>
         <div className={styles.shipBlock}>
@@ -74,11 +77,11 @@ function CartSidebar({ subtotal, tax, discount, total, checkoutDisabled }: CartS
             <MapPinMiniIcon className={styles.shipIcon} />
           </span>
           <div>
-            <div className={styles.shipLabel}>Shipping Address</div>
+            <div className={styles.shipLabel}>Адрес доставки</div>
             <div className={styles.shipValue}>
-              123 Construction Ave,<br />
-              Builder City, BC 12345,<br />
-              United States
+              Проспект Клецкова 76,<br />
+              Гродно,<br />
+              Республика Беларусь
             </div>
           </div>
         </div>

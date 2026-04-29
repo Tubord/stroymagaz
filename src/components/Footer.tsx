@@ -1,4 +1,5 @@
-import { FacebookIcon, InstagramIcon, LinkedinIcon, TwitterIcon } from "./icons";
+import { FacebookIcon, InstagramIcon, LinkedinIcon, ViberIcon } from "./icons";
+
 import styles from "./Footer.module.css";
 
 export function Footer() {
@@ -17,7 +18,7 @@ export function Footer() {
                 <FacebookIcon />
               </a>
               <a className={styles.socialLink} href="#" aria-label="Twitter">
-                <TwitterIcon />
+                <ViberIcon />
               </a>
               <a className={styles.socialLink} href="#" aria-label="Instagram">
                 <InstagramIcon />

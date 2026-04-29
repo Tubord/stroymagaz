@@ -2,7 +2,9 @@ import { useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
+import { ImageCarousel } from "../components/ImageCarousel";
 import { ProductCard } from "../components/ProductCard";
+import { Rating } from "../components/Rating";
 import { BadgeBoxIcon, BadgeShieldIcon, BadgeTruckIcon, CartIcon } from "../components/icons";
 import { products } from "../data/products";
 import type { TechnicalSpec } from "../types";
@@ -127,9 +129,9 @@ export function Product() {
           <div className={styles.container}>
             <p className={styles.breadcrumbs}>
               <Link to="/">Products</Link> <span aria-hidden="true">/</span>{" "}
-              Not found
+              Не найдено
             </p>
-            <h1 className={styles.h1}>Product not found</h1>
+            <h1 className={styles.h1}>Товар не найден</h1>
           </div>
         </main>
       </div>
@@ -142,18 +144,23 @@ export function Product() {
       <main className={styles.main}>
         <div className={styles.container}>
           <p className={styles.breadcrumbs}>
-            <Link to="/">Products</Link> <span aria-hidden="true">/</span>{" "}
+            <Link to="/">Каталог</Link> <span aria-hidden="true">/</span>{" "}
             {product.name}
           </p>
 
           <div className={styles.layout}>
             <div className={styles.media}>
-
+              <ImageCarousel
+                images={product.images ?? [product.imageUrl]}
+                alt={product.name}
+              />
             </div>
 
             <div className={styles.panel}>
               <h1 className={styles.h1}>{product.name}</h1>
-
+              <div className={styles.metaRow}>
+                <Rating value={product.rating} />
+              </div>
               <div className={styles.priceRow}>
                 <div className={styles.price}>{formatPrice(product.price)}</div>
                 <div className={styles.unit}>/unit</div>
@@ -165,32 +172,32 @@ export function Product() {
                     <span className={styles.badgeIcon} aria-hidden="true">
                       <BadgeBoxIcon />
                     </span>
-                    Quality Assured
+                    Товар первого сорта
                   </div>
-                  <div className={styles.badgeText}>Premium grade material</div>
+                  <div className={styles.badgeText}>Качесвто гарантировано</div>
                 </div>
                 <div className={styles.badge}>
                   <div className={styles.badgeTitle}>
                     <span className={styles.badgeIcon} aria-hidden="true">
                       <BadgeTruckIcon />
                     </span>
-                    Fast Delivery
+                    Скорость доставки
                   </div>
-                  <div className={styles.badgeText}>2-5 business days</div>
+                  <div className={styles.badgeText}>1-3 рабочих дней</div>
                 </div>
                 <div className={styles.badge}>
                   <div className={styles.badgeTitle}>
                     <span className={styles.badgeIcon} aria-hidden="true">
                       <BadgeShieldIcon />
                     </span>
-                    Warranty
+                    Гарантия
                   </div>
-                  <div className={styles.badgeText}>30-day guarantee</div>
+                  <div className={styles.badgeText}>30-дней</div>
                 </div>
               </div>
 
               <div className={styles.qtyRow}>
-                <div className={styles.qtyLabel}>Quantity</div>
+                <div className={styles.qtyLabel}>Кол-во</div>
                 <div className={styles.qty}>
                   <button className={styles.qtyBtn} onClick={decreaseQty} type="button">
                     -
@@ -216,15 +223,15 @@ export function Product() {
                   onClick={() => addToCart(product, quantity)}
                 >
                   <CartIcon className={styles.primaryIcon} />
-                  Add to Cart
+                  Добавить в корзину
                 </button>
                 <button className={styles.secondary} type="button">
-                  Buy Now
+                  Купить
                 </button>
               </div>
 
               <section className={styles.about}>
-                <h2 className={styles.h2}>Description</h2>
+                <h2 className={styles.h2}>Описание</h2>
                 <p className={styles.p}>{description}</p>
 
                 <div className={styles.specCard}>
@@ -234,7 +241,7 @@ export function Product() {
                     aria-expanded={specsOpen}
                     onClick={() => setSpecsOpen((open) => !open)}
                   >
-                    <span>Technical Specifications</span>
+                    <span>Характеристики</span>
                     <span
                       className={specsOpen ? styles.specChevronOpen : styles.specChevron}
                       aria-hidden="true"
@@ -270,7 +277,7 @@ export function Product() {
           </div>
 
           <section className={styles.relatedSection}>
-            <h2 className={styles.relatedTitle}>Related Products</h2>
+            <h2 className={styles.relatedTitle}>Похожее</h2>
             {relatedProducts.length > 0 ? (
               <div className={styles.relatedList}>
                 {relatedProducts.map((related) => (
